@@ -1,0 +1,34 @@
+---
+
+- name: Configure OSPF Process
+  ios_config:
+    provider: "{{ cli }}"
+    lines:
+      - "router ospf {{ ospf_process }}"
+
+- name: Configure OSPF Attributes
+  ios_config:
+    provider: "{{ cli }}"
+    lines:
+      - "router-id {{ router_id }}"
+    parents: "router ospf {{ ospf_process }}"
+
+- name: Configure OSPF Networks
+  with_items: "{{ interfaces }}"
+  when: item.ospf_area is defined
+  ios_config:
+    provider: "{{ cli }}"
+    lines:
+      - "network {{ item.ip }} {{ item.netmask }} area {{ item.ospf_area }}"
+    parents: "router ospf {{ ospf_process }}"
+
+- name: Configure OSPF Passive Interfaces
+  with_items: "{{ interfaces }}"
+  when:
+    - item.ospf_passive is defined
+    - item.ospf_passive == True
+  ios_config:
+    provider: "{{ cli }}"
+    lines:
+      - "passive-interface {{ item.name }}"
+    parents: "router ospf {{ ospf_process }}"

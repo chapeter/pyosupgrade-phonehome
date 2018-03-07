@@ -1,0 +1,6 @@
+---
+
+- name: "Applying Common ASR1k Template"
+  ios_config:
+    provider: "{{ cli }}"
+    src: "asr_changes_template.j2"

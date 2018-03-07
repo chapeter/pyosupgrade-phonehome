@@ -1,0 +1,4 @@
+---
+
+dependencies:
+  - { role: asr1k_common }

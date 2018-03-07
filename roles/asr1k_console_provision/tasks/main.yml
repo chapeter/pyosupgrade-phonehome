@@ -1,0 +1,14 @@
+---
+
+- name: Get out of Q&A Prompt on {{ hostname }}
+  telnetterm:
+    host: 10.94.167.50
+    port: 2040
+    pause: 1
+    prompts:
+      - "[>|#]"
+      - "anything"
+    command:
+      - "term len 0"
+      - "show ver"
+      - "show run"

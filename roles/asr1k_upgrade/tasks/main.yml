@@ -1,0 +1,23 @@
+---
+
+### Do not need to do this as we are using a different startup Config
+### to maintain mgmt connectivity due to demo env
+#- name: "Setting Boot Variable"
+#  ios_config:
+#    provider: "{{ cli }}"
+#    save_when: always
+#    lines:
+#      - "no boot system flash {{ old_ver }}"
+#      - "boot system flash {{ new_ver }}"
+
+- name: "Setting Base Config for MGMT connectivity"
+  ios_command:
+    provider: "{{ cli }}"
+    commands:
+      - "copy flash:{{ new_config }} startup-config\n"
+
+- name: "Reloading Device"
+  ios_command:
+    provider: "{{ cli }}"
+    commands:
+      - "reload in 1\n"

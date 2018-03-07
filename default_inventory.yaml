@@ -1,0 +1,50 @@
+# virlutils generated ansible file for sim id pyosupgrade_demo_default_xNlb6i
+#
+# the overall structure of the inventory follows best practices
+# at http://docs.ansible.com/ansible/latest/intro_inventory.html
+
+
+# Management LXC containers provided by VIRL
+all:
+  children:
+      mgmt-lxc:
+        hosts:
+          # guest|pyosupgrade_demo_default_xNlb6i|virl|~mgmt-lxc
+          ~mgmt-lxc:
+
+            # NodeSubtype: mgmt-lxc
+
+            ansible_host: 10.94.241.194
+            ansible_python_interpreter: "/usr/bin/env python"
+
+
+  # Network related devices
+  # we've rendered what we think is best if you disagree, override
+  # virl.generators.ansible_inventory_generator
+
+      network:
+        hosts:
+          # guest|pyosupgrade_demo_default_xNlb6i|virl|xe3
+          xe3:
+
+            # NodeSubtype: IOSv
+
+            ansible_host: 10.94.241.194
+            port: 17019
+            ansible_python_interpreter: "/usr/bin/env python"
+          # guest|pyosupgrade_demo_default_xNlb6i|virl|xe1
+          xe1:
+
+            # NodeSubtype: IOSv
+
+            ansible_host: 10.94.241.194
+            port: 17013
+            ansible_python_interpreter: "/usr/bin/env python"
+          # guest|pyosupgrade_demo_default_xNlb6i|virl|xe2
+          xe2:
+
+            # NodeSubtype: IOSv
+
+            ansible_host: 10.94.241.194
+            port: 17017
+            ansible_python_interpreter: "/usr/bin/env python"

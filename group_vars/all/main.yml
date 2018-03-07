@@ -1,0 +1,14 @@
+---
+domain_name: "cisco.com"
+username: cisco
+password: cisco
+
+enable_password: cisco
+enable_secret: cisco
+
+ftp_server: 10.94.238.84
+ftp_username: chapeter
+ftp_password: cisco
+
+ANSIBLE_NET_USERNAME: cisco
+ANSIBLE_NET_PASSWORD: cisco

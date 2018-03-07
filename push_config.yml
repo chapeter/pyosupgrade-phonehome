@@ -1,0 +1,13 @@
+---
+
+- name: Push Router Configuration
+  hosts: site1
+  connection: local
+  vars:
+    cli:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  roles:
+#    - asr1k_common
+    - asr1k_routing

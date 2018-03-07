@@ -1,0 +1,57 @@
+---
+
+- name: Wipe configs
+  hosts: site1
+  connection: local
+  vars:
+    cli:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  roles:
+    - asr1k_wipe
+
+- name: "Pause for router reload"
+  hosts: site1
+  tasks:
+    - pause:
+        minutes: 6
+
+- name: Configure Base Configs via Console
+  hosts: site1
+  connection: local
+  vars:
+    cli:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  roles:
+    - asr1k_mgmt
+
+- name: "Pause for 1 min"
+  hosts: site1
+  tasks:
+    - pause:
+        minutes: 1
+
+- name: Run a Second Time because sometimes you need to
+  hosts: site1
+  connection: local
+  vars:
+    cli:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  roles:
+    - asr1k_mgmt
+
+- name: Configure Base Configs
+  hosts: site1
+  connection: local
+  vars:
+    cli:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  roles:
+    - asr1k_common

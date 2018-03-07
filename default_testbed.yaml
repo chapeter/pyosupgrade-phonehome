@@ -1,0 +1,199 @@
+testbed:
+
+  name: pyosupgrade_demo_default_TCssOS
+
+  servers:
+    
+    ~mgmt-lxc:
+      address: 10.94.241.239
+      server: ~mgmt-lxc
+
+    
+
+devices:
+
+  lxc-routem-1:
+    alias: lxc-routem-1
+    type: lxc-routem
+    connections:
+
+      defaults:
+        class: unicon.Unicon
+      console:
+        ip: 10.94.241.194
+        protocol: telnet
+        port: None
+
+  ~mgmt-lxc:
+    alias: ~mgmt-lxc
+    type: mgmt-lxc
+    connections:
+
+      defaults:
+        class: unicon.Unicon
+      console:
+        ip: 10.94.241.194
+        protocol: telnet
+        port: None
+
+  xe4:
+    alias: xe4
+    type: IOSv
+    connections:
+
+      defaults:
+        class: unicon.Unicon
+      console:
+        ip: 10.94.241.194
+        protocol: telnet
+        port: 17016
+
+  xe5:
+    alias: xe5
+    type: IOSv
+    connections:
+
+      defaults:
+        class: unicon.Unicon
+      console:
+        ip: 10.94.241.194
+        protocol: telnet
+        port: 17018
+
+  xe6:
+    alias: xe6
+    type: IOSv
+    connections:
+
+      defaults:
+        class: unicon.Unicon
+      console:
+        ip: 10.94.241.194
+        protocol: telnet
+        port: 17020
+
+  xe1:
+    alias: xe1
+    type: IOSv
+    connections:
+
+      defaults:
+        class: unicon.Unicon
+      console:
+        ip: 10.94.241.194
+        protocol: telnet
+        port: 17012
+
+  xe2:
+    alias: xe2
+    type: IOSv
+    connections:
+
+      defaults:
+        class: unicon.Unicon
+      console:
+        ip: 10.94.241.194
+        protocol: telnet
+        port: 17014
+
+topology:
+  lxc-routem-1:
+    interfaces:
+      eth1:
+        ipv4: 10.0.0.13/30
+        link: lxc-routem-1-to-xe4
+        type: ethernet
+      eth0:
+        ipv4: 10.94.241.235/27
+        link: flat
+        type: ethernet
+  ~mgmt-lxc:
+    interfaces:
+      eth0:
+        ipv4: 10.94.241.239/27
+        link: ~lxc-flat
+        type: ethernet
+      eth1:
+        ipv4: 10.94.241.238/27
+        link: flat
+        type: ethernet
+  xe4:
+    interfaces:
+      GigabitEthernet0/2:
+        ipv4: 10.0.0.34/30
+        link: xe2-to-xe4
+        type: ethernet
+      GigabitEthernet0/1:
+        ipv4: 10.0.0.18/30
+        link: xe1-to-xe4
+        type: ethernet
+      GigabitEthernet0/3:
+        ipv4: 10.0.0.14/30
+        link: lxc-routem-1-to-xe4
+        type: ethernet
+      GigabitEthernet0/0:
+        ipv4: 10.94.241.251/27
+        link: flat
+        type: ethernet
+  xe5:
+    interfaces:
+      GigabitEthernet0/1:
+        ipv4: 10.0.0.22/30
+        link: xe1-to-xe5
+        type: ethernet
+      GigabitEthernet0/0:
+        ipv4: 10.94.241.252/27
+        link: flat
+        type: ethernet
+  xe6:
+    interfaces:
+      GigabitEthernet0/1:
+        ipv4: 10.0.0.38/30
+        link: xe2-to-xe6
+        type: ethernet
+      GigabitEthernet0/0:
+        ipv4: 10.94.241.228/27
+        link: flat
+        type: ethernet
+  xe1:
+    interfaces:
+      GigabitEthernet0/2:
+        link: xe1-unconnected#1
+        type: ethernet
+      GigabitEthernet0/1:
+        ipv4: 10.0.0.5/30
+        link: xe1-to-xe2
+        type: ethernet
+      GigabitEthernet0/4:
+        ipv4: 10.0.0.21/30
+        link: xe1-to-xe5
+        type: ethernet
+      GigabitEthernet0/3:
+        ipv4: 10.0.0.17/30
+        link: xe1-to-xe4
+        type: ethernet
+      GigabitEthernet0/0:
+        ipv4: 10.94.241.249/27
+        link: flat
+        type: ethernet
+  xe2:
+    interfaces:
+      GigabitEthernet0/2:
+        link: xe2-unconnected#1
+        type: ethernet
+      GigabitEthernet0/1:
+        ipv4: 10.0.0.6/30
+        link: xe1-to-xe2
+        type: ethernet
+      GigabitEthernet0/4:
+        ipv4: 10.0.0.37/30
+        link: xe2-to-xe6
+        type: ethernet
+      GigabitEthernet0/3:
+        ipv4: 10.0.0.33/30
+        link: xe2-to-xe4
+        type: ethernet
+      GigabitEthernet0/0:
+        ipv4: 10.94.241.250/27
+        link: flat
+        type: ethernet

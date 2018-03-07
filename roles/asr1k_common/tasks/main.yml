@@ -1,0 +1,32 @@
+---
+
+- name: "Applying System Configs"
+  ios_system:
+    provider: "{{ cli }}"
+    lookup_enabled: no
+    domain_name: "{{ domain_name }}"
+    hostname: "{{ hostname }}"
+
+- name: "Enable Other System Settings that are not built in ios_system module"
+  ios_config:
+    provider: "{{ cli }}"
+    lines:
+      - "cdp run"
+      - "ip ftp source-interface {{ mgmt_interface }}"
+
+- name: "Configuring Base Interfaces"
+  with_items: "{{ interfaces }}"
+  ios_interface:
+    provider: "{{ cli }}"
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    enabled: "{{ item.cdp }}"
+
+- name: "Configuring Interfaces L3"
+  with_items: "{{ interfaces }}"
+  ios_config:
+    provider: "{{ cli }}"
+    lines:
+      - "ip address {{ item.ip }} {{ item.netmask }}"
+      - "ip ospf network point-to-point"
+    parents: "interface {{ item.name }}"

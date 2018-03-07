@@ -1,0 +1,8 @@
+test:
+  children:
+    site1:
+      hosts:
+        CO-asr1k-1:
+          ansible_host: 10.94.167.36
+          remote_addr: 10.94.167.50
+          remote_port: 2040

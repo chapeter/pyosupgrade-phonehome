@@ -1,0 +1,13 @@
+---
+
+- name: "Wiping Device"
+  ios_command:
+    provider: "{{ cli }}"
+    commands:
+      - "write erase \n"
+
+- name: "Reloading Device"
+  ios_command:
+    provider: "{{ cli }}"
+    commands:
+      - "reload in 1\n"
